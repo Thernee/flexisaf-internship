@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Signup to GradBuddy</title>
+  <link rel="stylesheet" href="css/forms.css">
+</head>
+
+<body>
+  <header>
+    <h1>Signup to GradBuddy</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="forms.html">Signup</a>
+    </nav>
+    <hr>
+  </header>
+
+  <main>
+    <form id="signupForm" method="post">
+      <label for="username">User Name:</label><br>
+      <input type="text" id="username" name="username" required><br>
+      <label for="fullname">Full Name:</label><br>
+      <input type="text" id="fullname" name="fullname" required><br>
+
+      <label for="email">Email Address:</label><br>
+      <input type="email" id="email" name="email" required><br>
+      <label for="phone">Phone Number:</label><br>
+      <input type="tel" id="phone" name="phone"><br>
+
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" required><br>
+      <label for="confirmPassword">Confirm Password:</label><br>
+      <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+
+      <label for="nationality">Nationality:</label>
+      <select id="nationality" name="nationality" required>
+        <option value="">-- select one --</option>
+      </select>
+
+      <input type="submit" value="Submit">
+    </form>
+
+    <p id="confirmation" style="display:none; margin-top: 1rem;">
+      You have signed up successfully
+    </p>
+  </main>
+
+  <footer style="text-align:center; margin-top:2rem;">
+    &copy; 2025 GradBuddy
+  </footer>
+
+  <script>
+    (async function loadCountries() {
+      try {
+        const resp = await fetch('countries.html');
+        if (!resp.ok) throw new Error('Could not load countries list');
+        const options = await resp.text();
+        document.getElementById('nationality').insertAdjacentHTML('beforeend', options);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+    });
+  </script>
+</body>
+
+</html>
