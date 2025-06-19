@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f9f9f9;
+}
+
+header {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../assets/Background-image.png') center/cover no-repeat;
+  padding: 2rem 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+header img {
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+header nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+main section {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+main section h2 {
+  margin-bottom: 0.75rem;
+  color: #007bff;
+  text-align: left;
+}
+
+main section p {
+  font-size: 1rem;
+  color: #555;
+}
+
+@media(min-width: 768px) {
+
+  #scholarships,
+  #search {
+    display: inline-block;
+    width: calc(50% - 1rem);
+    vertical-align: top;
+  }
+
+  #scholarships {
+    margin-right: 2%;
+  }
+}
+
+#about,
+#contact {
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #007bff;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
