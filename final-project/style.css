@@ -73,3 +73,29 @@ header {
   background: #970747;
   color: white;
 }
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.timer-control {
+  padding: 8px 16px;
+  border: 2px solid #970747;
+  border-radius: 4px;
+  background: white;
+  color: #970747;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, clor 0.2s;
+}
+
+.timer-control:hover {
+  background: #f9e6f1;
+}
+
+.timer-control.stop-btn {
+  display: none;
+}
