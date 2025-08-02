@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="style.css">
   <title>Pomodoro Timer - Boost Productivity</title>
   <script src="script.js"></script>
 </head>
@@ -15,31 +16,42 @@
   </header>
 
   <div class="toggle">
-    <button onclick="toggleTimer('pomodoro-timer')">Pomodoro</button>
-    <button onclick="toggleTimer('short-timer')">Short Break</button>
-    <button onclick="toggleTimer('long-timer')">Long Break</button>
+    <button class="tab-btn" onclick="toggleTimer('pomodoro-timer', this)">Pomodoro</button>
+    <button class="tab-btn" onclick="toggleTimer('short-timer', this)">Short Break</button>
+    <button class="tab-btn" onclick="toggleTimer('long-timer', this)">Long Break</button>
   </div>
+
 
   <div>
     <div id="pomodoro-timer" class="durations">
       <h3>POMODORO</h3>
-      <span>25</span>
-      <span>:</span>
-      <span>00</span>
+      <section class="timer">
+        <span class="minutes">25</span>
+        <span>:</span>
+        <span class="seconds">00</span>
+
+        <button class="timer-control">Start</button>
+        <button class="timer-control">Stop</button>
+        <button class="timer-control">Reset</button>
+      </section>
     </div>
 
     <div id="short-timer" class="durations">
       <h3>SHORT BREAK</h3>
-      <span>5</span>
-      <span>:</span>
-      <span>00</span>
+      <section class="timer">
+        <span class="minutes">5</span>
+        <span>:</span>
+        <span class="seconds">00</span>
+      </section>
     </div>
 
     <div id="long-timer" class="durations">
       <h3>LONG BREAK </h3>
-      <span>15</span>
-      <span>:</span>
-      <span>00</span>
+      <section class="timer">
+        <span class="minutes">15</span>
+        <span>:</span>
+        <span class="seconds">00</span>
+      </section>
     </div>
 
   </div>
