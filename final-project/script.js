@@ -25,6 +25,10 @@ function startTimer(timerId) {
 
   const activeTimer = document.getElementById(timerId);
 
+  // hide the start button and display stop button
+  activeTimer.querySelector('.start-btn').style.display = 'none';
+  activeTimer.querySelector('.stop-btn').style.display = 'inline-block';
+
   const minutes = activeTimer.querySelector('.minutes');
   const seconds = activeTimer.querySelector('.seconds');
 
@@ -54,12 +58,21 @@ function startTimer(timerId) {
 
 function stopTimer(timerId) {
   clearInterval(intervals[timerId]);
+
+  // hide stop button once clicked
+  const activeTimer = document.getElementById(timerId);
+  activeTimer.querySelector('.stop-btn').style.display = 'none';
+  activeTimer.querySelector('.start-btn').style.display = 'inline-block';
 }
 
 function resetTimer(timerId) {
   clearInterval(intervals[timerId]);
 
   const activeTimer = document.getElementById(timerId);
+
+  // Hide stop button on reset
+  activeTimer.querySelector('.stop-btn').style.display = 'none';
+  activeTimer.querySelector('.start-btn').style.display = 'inline-block';
 
   //Get the duration elements
   const minutes = activeTimer.querySelector('.minutes');
