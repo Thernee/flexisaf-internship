@@ -45,8 +45,31 @@ function startTimer(timerId) {
       parseSeconds--;
     }
 
+    // Update the DOM
     minutes.textContent = String(parseMinutes).padStart(2, '0')
     seconds.textContent = String(parseSeconds).padStart(2, '0');
   }, 1000);
 
+}
+
+function stopTimer(timerId) {
+  clearInterval(intervals[timerId]);
+}
+
+function resetTimer(timerId) {
+  clearInterval(intervals[timerId]);
+
+  const activeTimer = document.getElementById(timerId);
+
+  //Get the duration elements
+  const minutes = activeTimer.querySelector('.minutes');
+  const seconds = activeTimer.querySelector('.seconds');
+
+  // Get initial duration
+  const initialMins = activeTimer.dataset.minutes;
+  const initialSecs = activeTimer.dataset.seconds;
+
+  // Reset all elements to initial values
+  minutes.textContent = initialMins.padStart(2, '0');
+  seconds.textContent = initialSecs.padStart(2, '0');
 }
