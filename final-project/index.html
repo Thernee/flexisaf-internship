@@ -23,7 +23,7 @@
 
 
   <div>
-    <div id="pomodoro-timer" class="durations">
+    <div id="pomodoro-timer" class="durations" data-minutes="25" data-seconds="00">
       <h3>POMODORO</h3>
       <section class="timer">
         <span class="minutes">25</span>
@@ -31,7 +31,7 @@
         <span class="seconds">00</span>
 
         <button class="timer-control" onclick="startTimer('pomodoro-timer')">Start</button>
-        <button class="timer-control">Stop</button>
+        <button class="timer-control" onclick="stopTimer('pomodoro-timer')">Stop</button>
         <button class="timer-control" onclick="resetTimer('pomodoro-timer')">Reset</button>
       </section>
     </div>
