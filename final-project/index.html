@@ -20,6 +20,25 @@
     <button class="tab-btn" onclick="toggleTimer('short-timer', this)">Short Break</button>
     <button class="tab-btn" onclick="toggleTimer('long-timer', this)">Long Break</button>
   </div>
+  <button id="options-toggle">⚙️ Options</button>
+
+  <div id="options-panel" class="options-panel" hidden>
+    <h2>timer Settings</h2>
+    <label>
+      Pomodoro (minutes):
+      <input type="number" id="opt-pomodoro" min="1" value="25">
+    </label>
+    <label>
+      Short Break (minutes):
+      <input type="number" id="opt-short" min="1" value="5">
+    </label>
+    <label>
+      Long Break (minutes):
+      <input type="number" id="opt-long" min="1" value="15">
+    </label>
+    <button id="options-save">Save</button>
+    <button id="options-cancel">Cancel</button>
+  </div>
 
 
   <div>
