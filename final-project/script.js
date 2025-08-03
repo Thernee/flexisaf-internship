@@ -1,3 +1,22 @@
+// Defaults Durations
+const DEFAULTS = {
+  pomodoro: 25,
+  short: 5,
+  long: 15
+};
+
+// load/init config from localStorage
+let config = JSON.parse(localStorage.getItem('timerConfig')) || { ...DEFAULTS };
+
+let state = JSON.parse(localStorage.getItem('timerState')) || {
+  mode: 'pomodoro', // | 'short' | 'long'
+  minutes: config.pomodoro,
+  seconds: 0,
+  running: false
+};
+
+const intervals = {};
+
 function toggleTimer(timerId, btn) {
   document.querySelectorAll('.durations')
     .forEach(el => el.style.display = 'none');
@@ -10,13 +29,6 @@ function toggleTimer(timerId, btn) {
   btn.classList.add('active');
 
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const first = document.querySelector('.tab-btn');
-  if (first) first.click();
-});
-
-const intervals = {};
 
 function startTimer(timerId) {
   if (intervals[timerId]) {
@@ -86,3 +98,56 @@ function resetTimer(timerId) {
   minutes.textContent = initialMins.padStart(2, '0');
   seconds.textContent = initialSecs.padStart(2, '0');
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  //Show only pomodoro tab on load
+  const first = document.querySelector('.tab-btn');
+  if (first) first.click();
+
+  for (let mode of ['pomodoro', 'short', 'long']) {
+    const activeTimer = document.getElementById(`${mode}-timer`);
+    activeTimer.dataset.minutes = config[mode];
+    activeTimer.dataset.seconds = 0;
+
+    //update the time spans
+    activeTimer.querySelector('.minutes').textContent = String(config[mode]).padStart(2, '0');
+    activeTimer.querySelector('.seconds').textContent = '00';
+  }
+  //restore last state
+  toggleTimer(`${state.mode}-timer`, document.querySelector(`.tab-btn[onclick*="${state.mode}-timer"]`));
+  if (state.running) {
+    startTimer(`${state.mode}-timer`);
+
+    // fast forward state to last
+    const activeTimer = document.getElementById(`${mode}-timer`);
+    activeTimer.querySelector('.minutes').textContent = String(state.minutes).padStart(2, '0');
+    activeTimer.querySelector('.seconds').textContent = String(state.seconds).padStart(2, '0');
+  }
+
+  // request notifications permission if not granted
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+
+  // wire the options panel
+  document.getElementById('options-toggle').addEventListener('click', () => {
+    document.getElementById('options-panel').hidden = false;
+  });
+
+  document.getElementById('options-cancel').addEventListener('click', () => {
+    document.getElementById('options-panel').hidden = true;
+  });
+
+  document.getElementById('options-save').addEventListener('click', () => {
+    // pull the new values
+    config.pomodoro = +document.getElementById('opt-pomodoro').value;
+    config.short = +document.getElementById('opt-short').value;
+    config.long = +document.getElementById('opt-long').value;
+
+    // persist/update
+    localStorage.setItem('timerConfig', JSON.stringify(config));
+
+    // reload the page so
+    window.location.reload();
+  });
+});
