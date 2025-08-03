@@ -93,3 +93,7 @@ header {
 .timer-control.stop-btn {
   display: none;
 }
+
+span {
+  font-size: 2rem;
+}

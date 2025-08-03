@@ -38,22 +38,32 @@
       </div>
     </div>
 
-    <div id="short-timer" class="durations">
+    <div id="short-timer" class="durations" data-minutes="5" data-seconds="00">
       <h3>SHORT BREAK</h3>
       <section class="timer">
         <span class="minutes">5</span>
         <span>:</span>
         <span class="seconds">00</span>
       </section>
+      <div class="timer-controls">
+        <button class="timer-control start-btn" onclick="startTimer('short-timer')">Start</button>
+        <button class="timer-control stop-btn" onclick="stopTimer('short-timer')">Stop</button>
+        <button class="timer-control reset-btn" onclick="resetTimer('short-timer')">Reset</button>
+      </div>
     </div>
 
-    <div id="long-timer" class="durations">
+    <div id="long-timer" class="durations" data-minutes="15" data-seconds="00">
       <h3>LONG BREAK </h3>
       <section class="timer">
         <span class="minutes">15</span>
         <span>:</span>
         <span class="seconds">00</span>
       </section>
+      <div class="timer-controls">
+        <button class="timer-control start-btn" onclick="startTimer('long-timer')">Start</button>
+        <button class="timer-control stop-btn" onclick="stopTimer('long-timer')">Stop</button>
+        <button class="timer-control reset-btn" onclick="resetTimer('long-timer')">Reset</button>
+      </div>
     </div>
 
   </div>
