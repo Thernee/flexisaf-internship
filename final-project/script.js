@@ -36,11 +36,6 @@ function startTimer(timerId) {
   }
 
   const activeTimer = document.getElementById(timerId);
-
-  // hide the start button and display stop button
-  activeTimer.querySelector('.start-btn').style.display = 'none';
-  activeTimer.querySelector('.stop-btn').style.display = 'inline-block';
-
   const minutes = activeTimer.querySelector('.minutes');
   const seconds = activeTimer.querySelector('.seconds');
 
@@ -48,11 +43,22 @@ function startTimer(timerId) {
   let parseMinutes = parseInt(minutes.textContent, 10);
   let parseSeconds = parseInt(seconds.textContent, 10);
 
+  // mark state as running and persist
+  state = { mode: timerId.replace('-timer', ''), parseMinutes, parseSeconds, running: true };
+  localStorage.setItem('timerState', JSON.stringify(state));
+
+  // hide the start button and display stop button
+  activeTimer.querySelector('.start-btn').style.display = 'none';
+  activeTimer.querySelector('.stop-btn').style.display = 'inline-block';
+
   // store interval ID
   intervals[timerId] = setInterval(() => {
     if (parseSeconds === 0) {
       if (parseMinutes === 0) {
         clearInterval(intervals[timerId]);
+        notifyEnd(state.mode);
+        state.running = false;
+        localStorage.setItem('timerState', JSON.stringify(state));
         return;
       }
       parseMinutes--;
@@ -64,6 +70,10 @@ function startTimer(timerId) {
     // Update the DOM
     minutes.textContent = String(parseMinutes).padStart(2, '0')
     seconds.textContent = String(parseSeconds).padStart(2, '0');
+
+    //persist on each tick
+    state = { ...state, parseMinutes, parseSeconds };
+    llocalStorage.setItem('timerState', JSON.stringify(state));
   }, 1000);
 
 }
