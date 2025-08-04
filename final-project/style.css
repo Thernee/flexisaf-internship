@@ -119,6 +119,10 @@ span {
   z-index: 10;
 }
 
+.options-panel[hidden] {
+  display: none;
+}
+
 .options-panel label {
   display: flex;
   justify-content: space-between;

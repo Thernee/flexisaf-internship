@@ -20,8 +20,11 @@ const intervals = {};
 function toggleTimer(timerId, btn) {
   document.querySelectorAll('.durations')
     .forEach(el => el.style.display = 'none');
-  const activeTimer = document.getElementById(timerId).style.display = 'block';
+  document.getElementById(timerId).style.display = 'block';
 
+  // update and persist state
+  state.mode = timerId.replace('-timer', '');
+  localStorage.setItem('timerState', JSON.stringify(state));
 
   // Remove .active from all buttons, add to clicked one
   document.querySelectorAll('.tab-btn')
@@ -73,7 +76,7 @@ function startTimer(timerId) {
 
     //persist on each tick
     state = { ...state, parseMinutes, parseSeconds };
-    llocalStorage.setItem('timerState', JSON.stringify(state));
+    localStorage.setItem('timerState', JSON.stringify(state));
   }, 1000);
 
 }
@@ -85,6 +88,10 @@ function stopTimer(timerId) {
   const activeTimer = document.getElementById(timerId);
   activeTimer.querySelector('.stop-btn').style.display = 'none';
   activeTimer.querySelector('.start-btn').style.display = 'inline-block';
+
+  //update state and persist
+  state.running = false;
+  localStorage.setItem('timerState', JSON.stringify(state));
 }
 
 function resetTimer(timerId) {
@@ -107,6 +114,10 @@ function resetTimer(timerId) {
   // Reset all elements to initial values
   minutes.textContent = initialMins.padStart(2, '0');
   seconds.textContent = initialSecs.padStart(2, '0');
+
+  //update state and persist
+  state.running = false;
+  localStorage.setItem('timerState', JSON.stringify(state));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -129,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer(`${state.mode}-timer`);
 
     // fast forward state to last
-    const activeTimer = document.getElementById(`${mode}-timer`);
+    const activeTimer = document.getElementById(`${state.mode}-timer`);
     activeTimer.querySelector('.minutes').textContent = String(state.minutes).padStart(2, '0');
     activeTimer.querySelector('.seconds').textContent = String(state.seconds).padStart(2, '0');
   }
@@ -180,8 +191,8 @@ function notifyEnd(mode) {
 }
 
 // make timer elements listen to keydown
-document.querySelector('.timer').forEach(el => {
-  el.tableIndex = 0;
+document.querySelectorAll('.timer').forEach(el => {
+  el.tabIndex = 0;
   el.addEventListener('keydown', e => {
     const activeTimer = el.closest('.durations');
     const id = activeTimer.id;
