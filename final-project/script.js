@@ -178,3 +178,20 @@ function notifyEnd(mode) {
   const audio = new Audio('https://freesound.org/data/previews/240/240777_3986881-lq.mp3');
   audio.play();
 }
+
+// make timer elements listen to keydown
+document.querySelector('.timer').forEach(el => {
+  el.tableIndex = 0;
+  el.addEventListener('keydown', e => {
+    const activeTimer = el.closest('.durations');
+    const id = activeTimer.id;
+    if (e.code === 'Space' || e.code === 'Enter') {
+      if (state.running && state.mode === id.replace('-timer', '')) {
+        stopTimer(id);
+      } else {
+        startTimer(id);
+      }
+      e.preventDefault();
+    }
+  });
+});
