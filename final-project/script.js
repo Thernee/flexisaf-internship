@@ -161,3 +161,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.reload();
   });
 });
+
+// notification when timers end
+function notifyEnd(mode) {
+  const title = mode === 'pomodoro' ? '🎉 Pomodoro Complete!' : '✓ Break Over!';
+
+  //browser notificatio
+  if ('Notification' in window && Notification.permission === 'granted') {
+    new Notification(title, {
+      body: 'Click to start the next timer.',
+      // icon: 'https://link.com/icon.png'
+    });
+  }
+
+  //play audio when finished
+  const audio = new Audio('https://freesound.org/data/previews/240/240777_3986881-lq.mp3');
+  audio.play();
+}
